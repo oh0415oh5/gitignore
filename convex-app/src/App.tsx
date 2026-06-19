@@ -5,18 +5,19 @@ import { api } from "../convex/_generated/api";
 import "./App.css";
 
 function TasksApp() {
-  const tasks = useQuery(api.tasks.list);
+  const storeUser = useMutation(api.users.store);
+  const [userStored, setUserStored] = useState(false);
+  const [title, setTitle] = useState("");
+  const tasks = useQuery(api.tasks.list, userStored ? {} : "skip");
   const create = useMutation(api.tasks.create);
   const update = useMutation(api.tasks.update);
   const remove = useMutation(api.tasks.remove);
-  const storeUser = useMutation(api.users.store);
-  const [title, setTitle] = useState("");
 
   useEffect(() => {
-    void storeUser();
+    void storeUser().then(() => setUserStored(true));
   }, [storeUser]);
 
-  if (tasks === undefined) {
+  if (!userStored || tasks === undefined) {
     return <div className="app">Loading tasks...</div>;
   }
 
