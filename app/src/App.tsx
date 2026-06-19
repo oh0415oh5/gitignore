@@ -43,7 +43,7 @@ export default function App() {
 function AuthenticatedContent() {
   const { isLoading } = useConvexAuth();
   const storeUser = useMutation(api.users.storeUser);
-  const currentUser = useQuery(api.users.getCurrent);
+  const currentUser = useQuery(api.users.getViewer);
 
   useEffect(() => {
     if (!isLoading) {
@@ -51,7 +51,7 @@ function AuthenticatedContent() {
     }
   }, [isLoading, storeUser]);
 
-  if (isLoading || currentUser === undefined) {
+  if (isLoading || currentUser === undefined || currentUser === null) {
     return (
       <section className="card">
         <p>Loading your profile...</p>
