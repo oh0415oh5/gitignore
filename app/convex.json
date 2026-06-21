@@ -1,0 +1,14 @@
+{
+  "authKit": {
+    "dev": {
+      "configure": {
+        "redirectUris": ["http://localhost:5173/callback"],
+        "corsOrigins": ["http://localhost:5173"]
+      },
+      "localEnvVars": {
+        "VITE_WORKOS_CLIENT_ID": "WORKOS_CLIENT_ID",
+        "VITE_WORKOS_REDIRECT_URI": "WORKOS_REDIRECT_URI"
+      }
+    }
+  }
+}
